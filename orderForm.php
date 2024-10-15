@@ -18,7 +18,7 @@ include 'db_connection.php';
 $productId = intval($_GET['product_id']);
 
 // Fetch product details from the database
-$query = "SELECT id, name, description, price, image_url FROM products WHERE id = ?";
+$query = "SELECT id, name, description, price, size, image_url FROM products WHERE id = ?";
 $stmt = $db->prepare($query);
 $stmt->bind_param("i", $productId);
 $stmt->execute();
@@ -32,12 +32,12 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-<form class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md" method="POST" action="process_order.php">
-    <input type="hidden" name="productId" value="<?php echo $product['id']; ?>" />
+<form class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md" id="orderForm" method="POST" action="process_order.php">
+    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>" />
 
     <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Name:</label>
-        <?php echo htmlspecialchars($product['name']); ?>
+        <span><?php echo htmlspecialchars($product['name']); ?></span>
     </div>
 
     <div class="mb-4">
@@ -51,24 +51,22 @@ if ($result->num_rows > 0) {
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Price:</label>
-        <?php echo htmlspecialchars($product['price']); ?>
+        <label class="block text-sm font-medium text-gray-700">Price:
+            <span class="text-blue-500"><?php echo htmlspecialchars($product['price']); ?></span>
+        </label>
     </div>
 
     <div class="mb-4">
-        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity (max 10):</label>
-        <input type="number" id="quantity" name="quantity" min="1" max="10" required class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+        <span class="block text-sm font-medium text-gray-700">Size:
+            <?php echo htmlspecialchars($product['size']); ?>
+        </span>
     </div>
-
+    
     <div class="mb-4">
-        <span class="block text-sm font-medium text-gray-700">Size:</span>
-        <div class="flex space-x-4 mt-2">
-            <label class="flex items-center"><input type="radio" name="size" value="sm" class="mr-2" /> SM</label>
-            <label class="flex items-center"><input type="radio" name="size" value="m" class="mr-2" /> M</label>
-            <label class="flex items-center"><input type="radio" name="size" value="l" class="mr-2" /> L</label>
-            <label class="flex items-center"><input type="radio" name="size" value="xl" class="mr-2" /> XL</label>
-            <label class="flex items-center"><input type="radio" name="size" value="xxl" class="mr-2" /> XXL</label>
-        </div>
+        <label for="facebook_account">Facebook Account:</label>
+        <input type="text" id="facebook_account" name="facebook_account" placeholder="Enter your Facebook account" required class="mt-1 block w-full border border-gray-300 rounded-md">
+       
+
     </div>
 
     <div class="mb-4">
@@ -79,8 +77,18 @@ if ($result->num_rows > 0) {
     </div>
 
     <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600">Buy Now</button>
-    <a href="apparelShop.php"><p class="mt-3 w-full bg-red-500 text-white font-bold py-2 text-center rounded hover:bg-blue-600">Cancel</p></a>
+    <a href="apparelShop.php">
+        <p class="mt-3 w-full bg-red-500 text-white font-bold py-2 text-center rounded hover:bg-blue-600">Cancel</p>
+    </a>
 </form>
+
+<script>
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+        // Store the Facebook account in session storage
+        const facebookAccount = document.getElementById('facebook_account').value;
+        sessionStorage.setItem('facebook_account', facebookAccount);
+    });
+</script>
 
 </body>
 </html>

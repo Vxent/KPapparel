@@ -20,6 +20,7 @@ if ($conn->connect_error) {
 $name = $_POST['name'];
 $description = $_POST['description'];
 $price = $_POST['price'];
+$size = $_POST['size'];
 
 // Handle image upload
 $image_url = '';
@@ -56,8 +57,11 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 }
 
 // Prepare and bind
-$stmt = $conn->prepare("INSERT INTO products (name, description, price, image_url) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssds", $name, $description, $price, $image_url);
+$stmt = $conn->prepare("INSERT INTO products (name, description, price, size, image_url) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("ssdsd", $name, $description, $price, $size, $image_url); // Added size to the bind parameters
+
+
+
 
 // Execute the query
 if ($stmt->execute()) {
@@ -74,3 +78,15 @@ $conn->close();
 header("Location: myProducts.php");
 exit();
 ?>
+
+
+
+
+
+
+
+
+
+
+
+

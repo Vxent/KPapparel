@@ -58,7 +58,7 @@ if ($isLoggedIn) {
                 <div class="flex-1 flex justify-start">
                     <div class="hidden md:flex space-x-4 p-2">
                         <a href="#Main" class="hidden md:inline-block font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">Home</a>
-                        <a href="#varieties" class="hidden md:inline-block text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">Sports</a>
+                        <a href="order_history.php" class="hidden md:inline-block text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">History Order</a>
                         <a href="#about" class="hidden md:inline-block text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">About</a>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ if ($isLoggedIn) {
                     </div>
                     <div id="navbar-menu" class="navbar-menu md:hidden">
                         <a href="#Main" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
-                        <a href="#varieties" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sports</a>
+                        <a href="order_history.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">History order</a>
                         <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About</a>
                         <a href="contacts.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contacts</a>
                         <?php if ($isLoggedIn): ?>

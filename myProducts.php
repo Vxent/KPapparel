@@ -80,15 +80,9 @@ $result = $db->query($query);
                 My Products
             </a>
             
-            <a href="calendar.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                Calendar
-            </a>
+      
         </nav>
-        <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
-            <i class="fas fa-arrow-circle-up mr-3"></i>
-            Upgrade to Pro!
-        </a>
+  
     </aside>
 
     <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
@@ -137,25 +131,13 @@ $result = $db->query($query);
                     <i class="fas fa-tablet-alt mr-3"></i>
                     Tabbed Content
                 </a>
-                <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Support
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
+       
+               
                 <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-sign-out-alt mr-3"></i>
                     Sign Out
                 </a>
-                <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
-                </button>
+             
             </nav>
         </header>
 
@@ -275,11 +257,11 @@ $result = $db->query($query);
                         <div class="mb-4">
         <span class="block text-sm font-medium text-gray-700">Size:</span>
         <div class="flex space-x-4 mt-2">
-            <label class="flex items-center"><input type="radio" name="size" value="sm" class="mr-2" /> SM</label>
-            <label class="flex items-center"><input type="radio" name="size" value="m" class="mr-2" /> M</label>
-            <label class="flex items-center"><input type="radio" name="size" value="l" class="mr-2" /> L</label>
-            <label class="flex items-center"><input type="radio" name="size" value="xl" class="mr-2" /> XL</label>
-            <label class="flex items-center"><input type="radio" name="size" value="xxl" class="mr-2" /> XXL</label>
+            <label class="flex items-center"><input type="radio" name="size" value="SM" class="mr-2" /> SM</label>
+            <label class="flex items-center"><input type="radio" name="size" value="M" class="mr-2" /> M</label>
+            <label class="flex items-center"><input type="radio" name="size" value="L" class="mr-2" /> L</label>
+            <label class="flex items-center"><input type="radio" name="size" value="XL" class="mr-2" /> XL</label>
+            <label class="flex items-center"><input type="radio" name="size" value="XXL" class="mr-2" /> XXL</label>
         </div>
     </div>
                         <div class="space-y-2">

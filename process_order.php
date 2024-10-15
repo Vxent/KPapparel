@@ -1,28 +1,35 @@
 <?php
+// Start session
 session_start();
 include 'db_connection.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $productName = htmlspecialchars($_POST['productName']);
-    $productImage = htmlspecialchars($_POST['productImage']);
-    $productDescription = htmlspecialchars($_POST['productDescription']);
-    $productPrice = $_POST['productPrice'];
-    $quantity = $_POST['quantity'];
-    $size = $_POST['size'];
+// Assuming you have the user ID stored in the session
+$user_id = $_SESSION['user_id']; // Get the logged-in user ID
+$product_id = $_POST['product_id']; // Get product ID from form submission
+$status = "Pending"; // Set initial order status
 
-    $query = "INSERT INTO orders (user_id, product_name, product_image, product_description, product_price, quantity, size) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param("issdiss", $_SESSION['user_id'], $productName, $productImage, $productDescription, $productPrice, $quantity, $size);
-    $stmt->execute();
+// Insert order record
+$stmt = $db->prepare("INSERT INTO orders (user_id, product_id, order_date, status) VALUES (?, ?, NOW(), ?)");
+$stmt->bind_param("iis", $user_id, $product_id, $status);
 
-    if ($stmt->affected_rows > 0) {
-        header('Location: confirmation.php'); // Redirect to confirmation page
-        exit();
-    } else {
-        echo "Error processing order.";
-    }
-
-    $stmt->close();
+if ($stmt->execute()) {
+    echo "Order recorded successfully.";
+} else {
+    echo "Error: " . $stmt->error;
 }
+// Getting FB Acc through js
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Capture the Facebook account from the form
+    if (isset($_POST['facebook_account'])) {
+        $_SESSION['facebook_account'] = htmlspecialchars($_POST['facebook_account']);
+    }
+    // Process the order...
+}
+
+
+
+// Close connections
+$stmt->close();
 $db->close();
 ?>
+

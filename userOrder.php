@@ -8,17 +8,25 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Fetch user data
-$userId = $_SESSION['user_id'];
-$query = "SELECT username, address, contact_no, email FROM users WHERE id = ?";
-$stmt = $db->prepare($query);
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
+// Check if the user is an admin (BACKUP)
+// if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+//     echo "Access denied.";
+//     exit();
+// }
+$query = "
+    SELECT o.id, u.username, u.address, u.contact_no, p.name AS product_name, p.price AS product_price, p.image_url AS product_image, o.order_date, o.status 
+    FROM orders o
+    JOIN users u ON o.user_id = u.id
+    JOIN products p ON o.product_id = p.id
+    ORDER BY o.order_date DESC
+";
 
-$userData = $result->fetch_assoc();
-$stmt->close();
+
+
+
+$result = $db->query($query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,32 +76,14 @@ $stmt->close();
                 <i class="fas fa-table mr-3"></i>
                 My Products
       
-            <a href="calendar.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                Calendar
-            </a>
+     
         </nav>
-        <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
-            <i class="fas fa-arrow-circle-up mr-3"></i>
-            Upgrade to Pro!
-        </a>
+
     </aside>
 
     <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
         <!-- Desktop Header -->
-        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
-            <div class="w-1/2"></div>
-            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
-                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-                    <img src="https://tse1.mm.bing.net/th?id=OIP.V0NH3fa-mZ4AJ94SEQTy_wHaHa&pid=Api&P=0&h=220">
-                </button>
-                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
-                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-                   
-             
-                    <a href="logout.php" class="block px-4 py-2 account-link hover:text-white">Log out</a>
-                </div>
-            </div>
+        
         </header>
 
         <!-- Mobile Header & Nav -->
@@ -128,10 +118,7 @@ $stmt->close();
                     <i class="fas fa-tablet-alt mr-3"></i>
                     Tabbed Content
                 </a>
-                <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
+         
                 <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-cogs mr-3"></i>
                     Support
@@ -151,32 +138,69 @@ $stmt->close();
  
         </header>
     
-        <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-4">Order Details</h2>
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Name</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Address</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Contact</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Email address</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Item</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Size</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">Price</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-left text-gray-600 font-bold">QT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   
-                </tbody>
+        <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-4">Order Details</h2>
+    <div class="overflow-x-auto">
+        <?php if ($result->num_rows > 0) { ?>
+            <table class="min-w-full border border-gray-600">
+                    <thead class="bg-gray-600 ">
+                        <tr>
+                            <th class="px-4 py-2 text-left border-b">Order ID</th>
+                            <th class="px-4 py-2 text-left border-b">Customer</th>
+                            <th class="px-4 py-2 text-left border-b">Address</th>
+                            <th class="px-4 py-2 text-left border-b">Contact No</th>
+                            <th class="px-4 py-2 text-left border-b">FB Account</th>
+                            <th class="px-4 py-2 text-left border-b">Product Name</th>
+                            <th class="px-4 py-2 text-left border-b">Product Price</th>
+                            <th class="px-4 py-2 text-left border-b">Product Image</th>
+                            <th class="px-4 py-2 text-left border-b">Order Date</th>
+                            <th class="px-4 py-2 text-left border-b">Status</th>
+                            <th class="px-4 py-2 text-left border-b">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+    <?php while ($row = $result->fetch_assoc()) { ?>
+        <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['id']); ?></td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['username']); ?></td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['address']); ?></td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['contact_no']); ?></td>
+            <td id="facebookAccountCell" class="px-4 py-2 border-b"><?php echo isset($_SESSION['facebook_account']) ? htmlspecialchars($_SESSION['facebook_account']) : 'N/A'; ?></td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['product_name']); ?></td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['product_price']); ?></td>
+            <td class="px-4 py-2 border-b">
+                <img src="<?php echo htmlspecialchars($row['product_image']); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>" class="w-16 h-16">
+            </td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['order_date']); ?></td>
+            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['status']); ?></td>
+            <td>Edit</td>
+        </tr>
+    <?php } ?>
+</tbody>
+
+
+
             </table>
-        </div>
+        <?php } else { ?>
+            <p class="text-gray-500">No orders found.</p>
+        <?php } ?>
+        <?php $db->close(); ?>
     </div>
+</div>
+
 
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+
+    <!-- JavaScript to retrieve and display the Facebook account -->
+    <script>
+
+        window.onload = function() {
+            const facebookAccount = sessionStorage.getItem('facebook_account');
+            document.getElementById('facebookAccountCell').innerText = facebookAccount ? facebookAccount : 'N/A';
+        };
+    </script>
 </body>
 </html>
