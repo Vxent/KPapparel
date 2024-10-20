@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $username; // Store username in session
             $db->query("INSERT INTO audit_log (user_id, action) VALUES ('$userId', 'User registered')");
             $successMessage = "You have successfully registered!"; // Set success message
+            echo "<script>document.addEventListener('DOMContentLoaded', function() { showModal(); });</script>";
         } else {
             $_SESSION['error'] = "Error: " . $db->error;
         }
@@ -39,134 +40,145 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #1d1f27;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: #fff;
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
         }
-
-        .container {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px; /* Max width for better view */
             text-align: center;
-            width: 400px;
+            border-radius: 10px;
         }
-
-        h1 {
-            margin-bottom: 30px;
-            color: #ff6b3a;
-            font-size: 24px;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
         }
-
-        .message {
-            margin-bottom: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .error {
-            background: #e74c3c;
-        }
-
-        .success {
-            background: #2ecc71;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 10px;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        textarea {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background: black;
-            color: #fff;
-        }
-
-        button {
-            padding: 10px;
-            background: orange;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background: #ff7d4a;
-        }
-
-        .link-button {
-            background: none;
-            border: none;
-            color: #ff6b3a;
+        .close:hover,
+        .close:focus {
+            color: black;
             text-decoration: none;
             cursor: pointer;
-            padding: 0;
-            font-size: 14px;
-            margin-top: 10px;
         }
-
-        .link-button:hover {
-            text-decoration: underline;
+        .modal-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .modal-body {
+            font-size: 18px;
         }
     </style>
 </head>
-<body style="background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/10/Black-and-Orange-Background-Full-HD.jpg'); background-size: cover; background-repeat: no-repeat;">
-    <div class="container">
-        <h1>Register</h1>
+<body class="bg-cover bg-no-repeat min-h-screen flex items-center justify-center" style="background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/10/Black-and-Orange-Background-Full-HD.jpg');">
+    <div class="container bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg p-10 rounded-lg shadow-lg text-center w-96">
+        <h1 class="text-2xl font-bold text-yellow-500 mb-6">Register</h1>
 
         <?php if (isset($_SESSION['error'])): ?>
-            <p class="message error"><?php echo $_SESSION['error']; ?></p>
+            <p class="message error bg-red-500 text-white p-3 rounded mb-4"><?php echo $_SESSION['error']; ?></p>
             <?php unset($_SESSION['error']); // Clear the error after displaying ?>
         <?php endif; ?>
 
-        <?php if (!empty($successMessage)): ?>
-            <p class="message success bg-yellow-500"><?php echo $successMessage; ?></p>
-        <?php endif; ?>
-
-        <form action="registration.php" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-            <label for="contact_no">Contact No:</label>
-            <input type="text" id="contact_no" name="contact_no">
-            <label for="address">Address:</label>
-            <textarea id="address" name="address"></textarea>
-            <button type="submit">REGISTER</button>
-            <a href="login.php" class="link-button">Back to Login</a>
+        <form action="registration.php" method="POST" class="space-y-4">
+            <div>
+                <label for="username" class="block text-left text-white">Username:</label>
+                <input type="text" id="username" name="username" required class="w-full p-2 bg-black text-white rounded">
+            </div>
+            <div>
+                <label for="email" class="block text-left text-white">Email:</label>
+                <input type="email" id="email" name="email" required class="w-full p-2 bg-black text-white rounded">
+            </div>
+            <div>
+                <label for="password" class="block text-left text-white">Password:</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" required class="w-full p-2 bg-black text-white rounded">
+                    <button type="button" class="absolute right-2 top-2 text-white toggle-password" onclick="togglePassword('password')">Show</button>
+                </div>
+            </div>
+            <div>
+                <label for="confirm_password" class="block text-left text-white">Confirm Password:</label>
+                <div class="relative">
+                    <input type="password" id="confirm_password" name="confirm_password" required class="w-full p-2 bg-black text-white rounded">
+                    <button type="button" class="absolute right-2 top-2 text-white toggle-password" onclick="togglePassword('confirm_password')">Show</button>
+                </div>
+            </div>
+            <div>
+                <label for="contact_no" class="block text-left text-white">Contact No:</label>
+                <input type="text" id="contact_no" name="contact_no" class="w-full p-2 bg-black text-white rounded">
+            </div>
+            <div>
+                <label for="address" class="block text-left text-white">Address:</label>
+                <textarea id="address" name="address" class="w-full p-2 bg-black text-white rounded"></textarea>
+            </div>
+            <div class="flex flex-col items-center space-y-2">
+                <button type="submit" class="w-full bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">REGISTER</button>
+                <a href="login.php" class="text-yellow-500 underline hover:no-underline">Back to Login</a>
+            </div>
         </form>
     </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">Registration Successful</div>
+            <div class="modal-body">You have successfully registered!</div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle password visibility
+        function togglePassword(id) {
+            var passwordInput = document.getElementById(id);
+            var toggleButton = passwordInput.nextElementSibling;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = 'Show';
+            }
+        }
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Function to show the modal
+        function showModal() {
+            modal.style.display = "block";
+        }
+    </script>
 </body>
 </html>

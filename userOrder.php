@@ -159,24 +159,24 @@ $result = $db->query($query);
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-    <?php while ($row = $result->fetch_assoc()) { ?>
-        <tr class="hover:bg-gray-50">
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['id']); ?></td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['username']); ?></td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['address']); ?></td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['contact_no']); ?></td>
-            <td id="facebookAccountCell" class="px-4 py-2 border-b"><?php echo isset($_SESSION['facebook_account']) ? htmlspecialchars($_SESSION['facebook_account']) : 'N/A'; ?></td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['product_name']); ?></td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['product_price']); ?></td>
-            <td class="px-4 py-2 border-b">
-                <img src="<?php echo htmlspecialchars($row['product_image']); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>" class="w-16 h-16">
-            </td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['order_date']); ?></td>
-            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['status']); ?></td>
-            <td>Edit</td>
-        </tr>
-    <?php } ?>
-</tbody>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['id']); ?></td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['address']); ?></td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['contact_no']); ?></td>
+                            <td id="facebookAccountCell" class="px-4 py-2 border-b"><?php echo isset($_SESSION['facebook_account']) ? htmlspecialchars($_SESSION['facebook_account']) : 'N/A'; ?></td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['product_name']); ?></td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['product_price']); ?></td>
+                            <td class="px-4 py-2 border-b">
+                                <img src="<?php echo htmlspecialchars($row['product_image']); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>" class="w-16 h-16">
+                            </td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['order_date']); ?></td>
+                            <td class="px-4 py-2 border-b"><?php echo htmlspecialchars($row['status']); ?></td>
+                            <td>Edit</td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
 
 
 

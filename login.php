@@ -62,203 +62,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Your existing CSS styles here */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #1d1f27;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: #fff;
-        }
-
-        nav {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            position: fixed;
-            top: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        nav .logo {
-            margin: 0 50px;
-            text-align: center;
-        }
-
-        nav .logo img {
-            height: 40px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #ff6b3a;
-        }
-        .nav-left{
-            text-align: center;
-        }
-
-        .container {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); /* This adds the blur effect */
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            width: 400px;
-            margin-top: 100px; /* Add margin to avoid overlap with the navbar */
-        }
-
-        h1 {
-            margin-bottom: 30px;
-            color: #ff6b3a;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 10px;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        input[type="email"],
-        input[type="password"] {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background: black;
-            color: #fff;
-        }
-
-        .password-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .password-container input[type="password"] {
-            flex: 1;
-            margin: 0;
-        }
-
-        .toggle-password {
-            background: transparent;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            margin-left: 10px;
-            font-size: 14px;
-        }
-
-        button {
-            padding: 10px;
-            margin-bottom: 30px;
-            background: orange;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #ff7d4a;
-        }
-
-        a {
-            color: #ff6b3a;
-            text-decoration: underline;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .success {
-            color: green;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body style="background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/10/Black-and-Orange-Background-Full-HD.jpg'); background-size: cover; background-repeat: no-repeat;">
-
-    <nav>
-        <ul class="nav-left">
-            <li><a href="#">Sports</a></li>
-            <li><a href="#">Services</a></li>
-        </ul>
-        <div class="logo">
-            <img src="images/logo1.png" alt="Logo">
+<body class="bg-cover bg-no-repeat min-h-screen flex flex-col items-center justify-center" style="background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/10/Black-and-Orange-Background-Full-HD.jpg');">
+    <nav class="w-full bg-black bg-opacity-70 p-4 fixed top-0 flex justify-between items-center z-50">
+        <div class="logo mx-12">
+            <img src="images/logo.png" alt="Logo" class="h-10">
         </div>
-        <ul class="nav-right">
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">About</a></li>
+        <ul class="flex space-x-4">
+            <li><a href="#" class="text-white hover:text-orange-500">Home</a></li>
+            <li><a href="#" class="text-white hover:text-orange-500">About</a></li>
+            <li><a href="#" class="text-white hover:text-orange-500">Contact</a></li>
         </ul>
     </nav>
-
-    <div class="container">
-        <img src="images/logo.png" alt="" width="200px" style="padding-bottom: 10px;">
-      
-        <form action="" method="POST">
-            <label for="email">Your Email Address:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            <label for="password">Your Password:</label>
-            <div class="password-container">
-                <input type="password" id="password" name="password" placeholder="Enter password" required>
-                <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+    <div class="container bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg p-10 rounded-lg shadow-lg text-center mt-32 w-80 sm:w-96">
+        <img src="images/logo.png" alt="Logo" class="w-32 mx-auto mb-6">
+        <form action="" method="POST" class="flex flex-col space-y-4">
+            <div>
+                <label for="email" class="block text-left text-white">Your Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required class="w-full p-2 bg-black text-white rounded">
             </div>
-            <button type="submit">LOG IN</button>
+            <div>
+                <label for="password" class="block text-left text-white">Your Password:</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" placeholder="Enter password" required class="w-full p-2 bg-black text-white rounded">
+                    <button type="button" class="absolute right-2 top-2 text-white toggle-password" onclick="togglePassword()">Show</button>
+                </div>
+            </div>
+            <button type="submit" class="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">LOG IN</button>
         </form>
-
-        <a onclick="window.location.href='registration.php'"><p>REGISTER</p></a>
-
+        <a href="registration.php" class="text-yellow-500 underline mt-4 inline-block hover:no-underline">REGISTER</a>
         <?php if ($successMessage): ?>
-            <p class="success"><?php echo $successMessage; ?></p>
+            <p class="text-green-500 mt-4"><?php echo $successMessage; ?></p>
         <?php endif; ?>
-
         <?php if ($error): ?>
-            <p class="error"><?php echo $error; ?></p>
+            <p class="text-red-500 mt-4"><?php echo $error; ?></p>
         <?php endif; ?>
     </div>
-
     <script>
         function togglePassword() {
             var passwordInput = document.getElementById('password');
