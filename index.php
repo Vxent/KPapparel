@@ -61,10 +61,13 @@ if ($isLoggedIn) {
         <div class="flex justify-between items-center py-2">
             <div class="flex-1 flex justify-start">
                 <div class="hidden md:flex space-x-4 p-2">
+
                     <a href="#Main" class="font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">Home</a>
-                    <a href="contacts.html" class="text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">Contacts</a>
-                 
                     <a href="#about" class="text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">About</a>
+                    <a href="#threats" class="text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">Services</a>
+                 
+                 
+                 
                 </div>
             </div>
             <div class="flex-1 flex justify-center">
@@ -74,7 +77,7 @@ if ($isLoggedIn) {
             </div>
             <div class="flex-1 flex justify-end">
                 <div class="hidden md:flex space-x-4 p-2">
-                    <a href="#threats" class="text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">Services</a>
+                <a href="#shop" class="text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-lg hover:underline">SHOP</a>
                 
                     <a href="order_history.php" class="text-gray-700 px-2 py-1 font-abhaya-libre uppercase text-white tracking-wider px-4 xl:px-8 py-2 text-sm hover:underline">History Order</a>
                     <?php if ($isLoggedIn): ?>
@@ -147,13 +150,13 @@ if ($isLoggedIn) {
                     <h2 class="text-4xl md:text-5xl lg:text-6xl text-white">Customize Your:</h2>
                     <div class="animation pt-4">
                         <div class="first text-yellow-500 text-3xl md:text-4xl">
-                            <div>TEAM</div>
+                            <div>APPAREL</div>
                         </div>
                         <div class="second text-yellow-500 text-3xl md:text-4xl">
-                            <div>GAME</div>
+                            <div>STYLE</div>
                         </div>
                         <div class="third text-yellow-500 text-3xl md:text-4xl">
-                            <div>JERSEY</div>
+                            <div>LOOK</div>
                         </div>
                     </div>
                     <div class="pt-14">
@@ -210,13 +213,14 @@ if ($isLoggedIn) {
 
     <!-- Size Guide -->      
 
-    <div class="flex mx-auto bg-white shadow-lg rounded-lg p-5" style="background-image: url(https://freevector-images.s3.amazonaws.com/uploads/vector/preview/40490/vecteezy_background-white_fj1220.jpg) ">
-    <div class="w-1/2 p-4">
-        <img src="images/3d.png" alt="Description" class="w-full h-auto rounded-lg">
-    </div>
-    <div class="w-1/2 p-4">
+    <div class="flex flex-col sm:flex-row mx-auto bg-white shadow-lg rounded-lg p-5 bg-black" style="background-image: url)">
+    <div class="w-full sm:w-1/2 p-4 ">
     <h3 class="text-4xl font-bold text-center text-gray-800 mb-4">SIZE GUIDE CHART</h3>
-        <table  class="min-w-full border-collapse text-orange-600 font-bold  bg-white">
+        <img src="images/sizeshirt.png" alt="Description" class="w-full h-auto rounded-lg">
+    </div>
+    <div class="w-full sm:w-1/2 p-4">
+
+        <table class="min-w-full border-collapse text-orange-600 font-bold bg-white">
             <thead>
                 <tr class="bg-black">
                     <th class="border px-4 py-6 text-white">Size</th>
@@ -261,8 +265,9 @@ if ($isLoggedIn) {
     </div>
 </div>
 
-    <!-- ABOUT SECTION -->
-    <section id="about">
+
+    <!-- SHOP -->
+    <section id="shop">
         <div class="py-16 bg-white">
             <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
                 <div class="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
@@ -271,16 +276,115 @@ if ($isLoggedIn) {
                     </div>
                     <div class="md:7/12 lg:w-6/12">
                         <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">Nuxt development is carried out by passionate developers</h2>
-                        <p class="mt-6 text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum omnis voluptatem accusantium nemo perspiciatis delectus atque autem! Voluptatum tenetur beatae unde aperiam, repellat expedita consequatur! Officiis id consequatur atque doloremque!</p>
-                        <p class="mt-4 text-gray-600">Nobis minus voluptatibus pariatur dignissimos libero quaerat iure expedita at? Asperiores nemo possimus nesciunt dicta veniam aspernatur quam mollitia.</p>
+                        <p class="mt-6 text-gray-600 pb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum omnis voluptatem accusantium nemo perspiciatis delectus atque autem! Voluptatum tenetur beatae unde aperiam, repellat expedita consequatur! Officiis id consequatur atque doloremque!</p>
+                          <a href="apparelShop.php" class="inline-block bg-black text-white py-2 px-4 rounded hover:bg-orange-300 transition">SHOP NOW</a>
                     </div>
                 </div>
                 <div class="pt-14">
-                    <a href="apparelShop.php" class="inline-block bg-black text-white py-2 px-4 rounded hover:bg-orange-300 transition">SHOP NOW</a>
+                 
                 </div>
             </div>
         </div>
     </section>
+    <!-- component -->
+<div id="services" class="section relative pt-20 pb-8 md:pt-16 md:pb-0 bg-white">
+    <div class="container xl:max-w-6xl mx-auto px-4">
+        <!-- Heading start -->
+        <header class="text-center mx-auto mb-12 lg:px-20">
+            <h2 class="text-2xl leading-normal mb-2 font-bold text-black">ABOUT US</h2>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 60" style="margin: 0 auto;height: 35px;" xml:space="preserve">
+                <circle cx="50.1" cy="30.4" r="5" class="stroke-primary" style="fill: transparent;stroke-width: 2;stroke-miterlimit: 10;"></circle>
+                <line x1="55.1" y1="30.4" x2="100" y2="30.4" class="stroke-primary" style="stroke-width: 2;stroke-miterlimit: 10;"></line>
+                <line x1="45.1" y1="30.4" x2="0" y2="30.4" class="stroke-primary" style="stroke-width: 2;stroke-miterlimit: 10;"></line>
+            </svg>
+            <p class="text-gray-500 leading-relaxed font-light text-xl mx-auto pb-2">Save time managing advertising &amp; Content for your business.</p>
+        </header>
+        <!-- End heading -->
+        <!-- row -->
+        <div class="flex flex-wrap flex-row -mx-4 text-center">
+            <div class="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: fadeInUp;">
+                <!-- service block -->
+                <div class="py-8 px-12 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                    <div class="inline-block text-gray-900 mb-4">
+                        <!-- icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg leading-normal mb-2 font-semibold text-black">SEO Services</h3>
+                    <p class="text-gray-500">This is a wider card with supporting text below as a natural content.</p>
+                </div>
+                <!-- end service block -->
+            </div>
+            <div class="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <!-- service block -->
+                <div class="py-8 px-12 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                    <div class="inline-block text-gray-900 mb-4">
+                        <!-- icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-chat-square-dots" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
+                            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg leading-normal mb-2 font-semibold text-black">Social Content</h3>
+                    <p class="text-gray-500">This is a wider card with supporting text below as a natural content.</p>
+                </div>
+                <!-- end service block -->
+            </div>
+            <div class="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.3s; animation-name: fadeInUp;">
+                <!-- service block -->
+                <div class="py-8 px-12 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                    <div class="inline-block text-gray-900 mb-4">
+                        <!-- icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-badge-ad" viewBox="0 0 16 16">
+                            <path d="M3.7 11l.47-1.542h2.004L6.644 11h1.261L5.901 5.001H4.513L2.5 11h1.2zm1.503-4.852l.734 2.426H4.416l.734-2.426h.053zm4.759.128c-1.059 0-1.753.765-1.753 2.043v.695c0 1.279.685 2.043 1.74 2.043.677 0 1.222-.33 1.367-.804h.057V11h1.138V4.685h-1.16v2.36h-.053c-.18-.475-.68-.77-1.336-.77zm.387.923c.58 0 1.002.44 1.002 1.138v.602c0 .76-.396 1.2-.984 1.2-.598 0-.972-.449-.972-1.248v-.453c0-.795.37-1.24.954-1.24z"></path>
+                            <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg leading-normal mb-2 font-semibold text-black">Creative ads</h3>
+                    <p class="text-gray-500">This is a wider card with supporting text below as a natural content.</p>
+                </div>
+                <!-- end service block -->
+
+                <!-- end service block -->
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+</div>
+
+    <!-- SERVICES -->
+     <!-- component -->
+<div class="py-16 bg-gray-800">  
+    <div class="container m-auto px-6 text-gray-500 md:px-12 xl:px-0">
+        <div class="mx-auto grid gap-6 md:w-3/4 lg:w-full lg:grid-cols-3">
+            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                <div class="mb-12 space-y-4">
+                    <h3 class="text-2xl font-semibold text-purple-900">Graphic Design</h3>
+                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
+                    <a href="#" class="block font-medium text-purple-600">Know more</a>
+                </div>
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg" class="w-2/3 ml-auto -mb-12" alt="illustration" loading="lazy" width="900" height="600">
+            </div>
+            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                <div class="mb-12 space-y-4">
+                    <h3 class="text-2xl font-semibold text-purple-900">UI Design</h3>
+                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
+                    <a href="#" class="block font-medium text-purple-600">Know more</a>
+                </div>
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto" alt="illustration" loading="lazy" width="900" height="600">
+            </div>
+            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                <div class="mb-12 space-y-4">
+                    <h3 class="text-2xl font-semibold text-purple-900">UX Design</h3>
+                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
+                    <a href="#" class="block font-medium text-purple-600">Know more</a>
+                </div>
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg" class="w-2/3 ml-auto " alt="illustration" loading="lazy" width="900" height="600">
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Footer Section -->
     <footer class="bg-black text-white p-8">
